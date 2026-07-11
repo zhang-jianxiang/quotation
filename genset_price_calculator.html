@@ -267,7 +267,7 @@ function render() {
     const adjusted = Boolean(selectedAlt || selectedCanopy || freight);
     const cost = adjusted ? adjustedCost : (row.cost_book || row.cost_calculated);
     const factory = adjusted ? adjustedCost * 1.10 : (row.factory_floor_book || row.factory_floor_calculated);
-    const custom = Number(factory || 0) * (1 + markup);
+    const custom = Number(cost || 0) * (1 + markup);
     const rowJson = encodeURIComponent(JSON.stringify(row));
     const h = v => String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     return '<tr data-row="' + rowJson + '"><td>' + h(row.brand) + '</td><td>' + h(row.section || '') + '</td><td>' + h(row.model) + '</td>' +
@@ -323,7 +323,7 @@ document.getElementById('copy').addEventListener('click', async () => {
     const adjustedCost = baseCost - (selectedAlt ? defaultAlt : 0) + selectedAltPrice + freight;
     const adjusted = Boolean(selectedAlt || freight);
     const factory = adjusted ? adjustedCost * 1.10 : Number(r.factory_floor_book || r.factory_floor_calculated || 0);
-    const custom = Number(factory || 0) * (1 + markup);
+    const custom = Number(cost || 0) * (1 + markup);
     const usd = (Number(custom) / rate).toFixed(0);
     const dict = {
       "ENGINE MODEL": r.model,
@@ -358,7 +358,7 @@ document.getElementById('copy').addEventListener('click', async () => {
     const adjusted = Boolean(selectedAlt || selectedCanopy || freight);
     const cost = adjusted ? adjustedCost : Number(row.cost_book || row.cost_calculated || 0);
     const factory = adjusted ? adjustedCost * 1.10 : Number(row.factory_floor_book || row.factory_floor_calculated || 0);
-    const custom = Number(factory || 0) * (1 + markup);
+    const custom = Number(cost || 0) * (1 + markup);
     lines.push([
       row.brand,
       row.section || '',
