@@ -1,0 +1,156 @@
+# ================================
+# Secrets — NEVER commit these
+# ================================
+API KEY.txt
+scf_deploy/.env
+*.env
+# Deploy scripts contain hardcoded cloud credentials
+scf_deploy/deploy_shanghai.js
+scf_deploy/deploy_scf.js
+# SCF index.js contains encrypted business data (very large)
+scf_deploy/index.js
+
+# ================================
+# Source Excel files (large binary)
+# ================================
+*.xlsx
+!genset_price_tool.py  # (this is a .py, keep it)
+*.docx
+
+# ================================
+# Backup / working copies
+# ================================
+*_backup.xlsx
+*_new.xlsx
+*_original.xlsx
+genset_price_tool.py.bak
+
+# ================================
+# Generated / build outputs
+# ================================
+# HTML calculator is needed for GitHub Pages — do NOT ignore
+genset_price_catalog.csv
+genset_price_catalog.json
+alternator_price_catalog.csv
+alternator_price_catalog.json
+canopy_price_catalog.csv
+canopy_price_catalog.json
+encrypted_data.json
+scf_deploy.zip
+*.txt
+!GITHUB-GUIDE.md
+  # Keep these: genset_price_tool.py, README.md, DEPLOY_WORKFLOW_GENSET_CALCULATOR.md, regenerate_price_tool_prompt.md
+
+# ================================
+# Deploy artifacts (generated at build time)
+# ================================
+scf_deploy/node_modules/
+web/node_modules/
+web_worker/node_modules/
+web_worker/data/
+scf_deploy_temp/node_modules/
+
+# ================================
+# Python cache
+# ================================
+__pycache__/
+*.pyc
+*.pyo
+
+# ================================
+# Screenshots / debug images
+# ================================
+*.png
+!LOGO.webp
+
+# ================================
+# Playwright / browser sessions
+# ================================
+playwright_session/
+
+# ================================
+# Wrangler / serverless state
+# ================================
+.wrangler/
+.wrangler-cache/
+*/.wrangler/
+
+# ================================
+# Temp / debug scripts (do not commit)
+# ================================
+apply_fix.py
+build_standalone.py
+build_worker2.py
+check_browser.py
+check_console.py
+check_data.py
+check_data_b64.py
+check_enc_data.py
+check_excel_prices.py
+check_file.py
+check_html.py
+check_join.py
+check_push.py
+check_push2.py
+check_script.ps1
+check_tab.py
+compare_prices.py
+cos_api_test.py
+deploy_tencent.py
+find_array_end.py
+find_bad.py
+find_bad2.py
+find_records.py
+fix_html.py
+fix_join.py
+fix_newline.py
+gen_debug.py
+gen_final.py
+gen_worker.py
+gen_*.py
+inject_debug.py
+inspect_excel.py
+inspect*.ps1
+make_test.py
+regen_encrypted_data.py
+sim_render.py
+temp_*
+tencent_api_bucket.py
+tencent_console_login.py
+tencent_create.py
+tencent_create_bucket.py
+tencent_deploy.py
+tencent_inspect.py
+tencent_login.py
+test_backslash.py
+test_bootstrap.py
+test_bootstrap_with_logs.py
+test_concat.py
+test_concat2.py
+test_data2.py
+test_debug.py
+test_debug2.py
+test_decompress.py
+test_decrypt.py
+test_decrypt2.py
+test_decrypt_final.py
+test_exact_boundary.py
+test_fix.py
+test_fix_approach.py
+test_manual_bootstrap.py
+test_page.js
+test_page.py
+test_parser.py
+test_script.ps1
+test_script_boundary.py
+test_script_content.py
+test_script_tag.py
+test_server.js
+test_small.py
+test_zlib_format.py
+trace_encryption.py
+upload_cos.py
+verify_encryption.py
+verify_prices.py
+wiz_*
+create_dialog.png

@@ -1,0 +1,30 @@
+component: scf
+name: genset-price-calculator-v2
+
+inputs:
+  name: genset-price-calculator-v2
+  region: ap-shanghai  # NOTE: ap-shanghai has active HTTP trigger. ap-guangzhou has no trigger (API Gateway discontinued).
+  runtime: Nodejs16.13
+  handler: index.main_handler
+  codeUri: ./
+  description: Genset Price Calculator API
+  memorySize: 256
+  timeout: 30
+  environment:
+    variables: {}
+  events:
+    - apigw:
+        parameters:
+          protocols:
+            - http
+            - https
+          environment: release
+          endpoints:
+            - path: /
+              method: ANY
+            - path: /api/genset
+              method: GET
+            - path: /api/alternator
+              method: GET
+            - path: /api/canopy
+              method: GET
