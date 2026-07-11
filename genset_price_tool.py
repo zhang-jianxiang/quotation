@@ -244,6 +244,7 @@ def extract_records(xlsx_path: Path) -> list[dict[str, Any]]:
                         "model": model,
                         "engine_power": str(display_cell(cells, row, cols.get("柴油机功率", 0))).strip(),
                         "engine_kw": first_number(display_cell(cells, row, cols.get("柴油机功率", 0))),
+                        "engine_price": round(numeric_cell(cells, row, cols.get("柴油机", 0)), 2) if "柴油机" in cols else "",
                         "genset_power": genset_power_raw,
                         "genset_kw": genset_kw,
                         "component_total": calculated["component_total"],
@@ -504,6 +505,7 @@ def write_csv(records: list[dict[str, Any]], path: Path) -> None:
         "model",
         "engine_power",
         "engine_kw",
+        "engine_price",
         "genset_power",
         "genset_kw",
         "component_total",
@@ -653,7 +655,7 @@ td .cv.done .cp::after {{ border-top-color: #2ea44f; }}
 <div class="table-wrap">
 <table class="genset">
 <thead><tr>
-<th>Brand</th><th>Section</th><th>Model</th><th>Engine Power</th><th>Genset Power</th>
+<th>Brand</th><th>Section</th><th>Model</th><th>Engine Power</th><th class="num">Engine Price</th><th>Genset Power</th>
 <th class="num">Default Alternator</th><th>Selected Alternator</th><th class="num">Alternator Price</th>
 <th>Silent Canopy</th><th class="num">Box Price</th><th class="num">Deduct</th>
 <th class="num">Freight</th><th class="num">Cost</th><th class="num">Sales</th>
@@ -800,7 +802,7 @@ function render() {{
     const rowJson = encodeURIComponent(JSON.stringify(row));
     const h = v => String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     return '<tr data-row="' + rowJson + '"><td>' + h(row.brand) + '</td><td>' + h(row.section || '') + '</td><td>' + h(row.model) + '</td>' +
-      '<td>' + h(row.engine_power || '') + '</td><td>' + h(row.genset_power) + '</td>' +
+      '<td>' + h(row.engine_power || '') + '</td><td class="num">' + (row.engine_price ? money(row.engine_price) : '') + '</td><td>' + h(row.genset_power) + '</td>' +
       '<td class="num">' + (defaultAlt ? money(defaultAlt) : '') + '</td>' +
       '<td>' + (selectedAlt ? (selectedAlt.brand + ' / ' + selectedAlt.model + ' (' + selectedAlt.power_kw + 'kW)') : '') + '</td>' +
       '<td class="num">' + (selectedAlt ? money(selectedAltPrice) : '') + '</td>' +
@@ -874,7 +876,7 @@ document.getElementById('copy').addEventListener('click', async () => {{
   const rate = Number(state['rate'].value || 6.8);
   const tab = String.fromCharCode(9);
   const nl = String.fromCharCode(10);
-  const lines = [['Brand','Section','Model','Engine Power','Genset Power','Default Alt','Selected Alt','Alt Price','Silent Box','Box Price','Deduct','Freight','Cost','Sales','USD','Source'].join(tab)];
+  const lines = [['Brand','Section','Model','Engine Power','Engine Price','Genset Power','Default Alt','Selected Alt','Alt Price','Silent Box','Box Price','Deduct','Freight','Cost','Sales','USD','Source'].join(tab)];
   rows.forEach(row => {{
     const selectedAlt = findAlternator(alternatorBrand, row.genset_kw);
     const selectedCanopy = useCanopy ? findCanopy(state['canopy'].value, row.genset_kw) : null;
@@ -893,6 +895,7 @@ document.getElementById('copy').addEventListener('click', async () => {{
       row.section || '',
       row.model,
       row.engine_power || '',
+      row.engine_price ? Number(row.engine_price).toFixed(0) : '',
       row.genset_power,
       defaultAlt ? defaultAlt.toFixed(0) : '',
       selectedAlt ? (selectedAlt.brand + ' / ' + selectedAlt.model + ' (' + selectedAlt.power_kw + 'kW)') : '',
