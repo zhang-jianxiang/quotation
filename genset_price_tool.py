@@ -772,7 +772,7 @@ function render() {{
   const freight = Number(state['freight'].value || 0);
   const rate = Number(state['rate'].value || 6.8);
   if (!brand && !state['power'].value && !term) {{
-    state['rows'].innerHTML = '<tr><td colspan="16" style="text-align:center;color:#999;padding:20px;">请选择发动机品牌或输入功率进行筛选</td></tr>';
+    state['rows'].innerHTML = '<tr><td colspan="17" style="text-align:center;color:#999;padding:20px;">请选择发动机品牌或输入功率进行筛选</td></tr>';
     state['count'].textContent = '';
     window.currentRows = [];
     return;
@@ -809,6 +809,8 @@ function render() {{
       '<td class="num">' + (selectedCanopy ? money(canopyPrice) : '') + '</td>' +
       '<td class="num">' + (selectedCanopy && selectedCanopy.deduct ? money(canopyDeduct) : '') + '</td>' +
       '<td class="num">' + (freight ? money(freight) : '') + '</td>' +
+      '<td class="num"><span class="cv" data-v="' + money(cost) + '"><span class="cp">Copy</span>' + money(cost) + '</span></td>' +
+      '<td class="num"><span class="cv" data-v="' + money(factory) + '"><span class="cp">Copy</span>' + money(factory) + '</span></td>' +
       '<td class="num"><span class="cv" data-v="' + money(custom) + '"><span class="cp">Copy</span>' + money(custom) + '</span></td>' +
       '<td class="num"><span class="cv" data-v="' + (Number(custom) / rate).toFixed(0) + '"><span class="cp">Copy</span>' + (Number(custom) / rate).toFixed(0) + '</span></td>' +
       '<td>' + h(row.source_sheet) + '!' + h(row.source_row) + '</td></tr>';
@@ -937,7 +939,7 @@ document.getElementById('altCopy').addEventListener('click', async () => {{
   document.getElementById('altCopy').textContent = 'Copied';
   setTimeout(() => document.getElementById('altCopy').textContent = 'Copy alternator prices', 1200);
 }});
-state.rows.innerHTML = '<tr><td colspan="16" style="text-align:center;color:#999;padding:20px;">请选择发动机品牌或输入功率进行筛选</td></tr>';
+state.rows.innerHTML = '<tr><td colspan="17" style="text-align:center;color:#999;padding:20px;">请选择发动机品牌或输入功率进行筛选</td></tr>';
 altState.rows.innerHTML = '';
 </script>
 </body>
