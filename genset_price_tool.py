@@ -604,7 +604,6 @@ body {{ margin: 0; background: #f6f7f9; color: #172026; }}
 main {{ max-width: 1280px; margin: 0 auto; padding: 24px; }}
 .titlebar {{ display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }}
 h1 {{ margin: 0; font-size: 28px; font-weight: 700; }}
-.logo {{ width: auto; height: 52px; object-fit: contain; }}
 h2 {{ margin: 34px 0 16px; font-size: 22px; font-weight: 700; }}
 .controls {{ display: grid; grid-template-columns: repeat(9, minmax(120px, 1fr)); gap: 10px; margin-bottom: 18px; }}
 label {{ display: grid; gap: 6px; font-size: 12px; color: #52616b; font-weight: 700; }}
@@ -633,7 +632,7 @@ td .cv.done .cp::after {{ border-top-color: #2ea44f; }}
 </head>
 <body>
 <main>
-<div class="titlebar"><h1>Genset Price Calculator</h1><img class="logo" src="LOGO.webp" alt="Logo"></div>
+<div class="titlebar"><h1>Genset Price Calculator</h1></div>
 <section class="controls">
 <label>Engine Brand<select id="brand"><option value="">All brands</option>{brand_options}</select></label>
 <label>Power kW<input id="power" type="number" min="0" step="1" placeholder="e.g. 100"></label>
