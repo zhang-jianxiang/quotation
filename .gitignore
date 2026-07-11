@@ -4,6 +4,8 @@
 API KEY.txt
 scf_deploy/.env
 *.env
+.github_token
+DEPLOY_GUIDE.md
 # Deploy scripts contain hardcoded cloud credentials
 scf_deploy/deploy_shanghai.js
 scf_deploy/deploy_scf.js
