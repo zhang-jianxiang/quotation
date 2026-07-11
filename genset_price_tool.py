@@ -656,7 +656,7 @@ td .cv.done .cp::after {{ border-top-color: #2ea44f; }}
 <th>Brand</th><th>Section</th><th>Model</th><th>Engine Power</th><th>Genset Power</th>
 <th class="num">Default Alternator</th><th>Selected Alternator</th><th class="num">Alternator Price</th>
 <th>Silent Canopy</th><th class="num">Box Price</th><th class="num">Deduct</th>
-<th class="num">Freight</th><th class="num">Cost</th><th class="num">Factory</th><th class="num">Sales</th>
+<th class="num">Freight</th><th class="num">Cost</th><th class="num">Sales</th>
 <th class="num">USD</th>
 <th>Source</th>
 </tr></thead>
@@ -771,7 +771,7 @@ function render() {{
   const freight = Number(state['freight'].value || 0);
   const rate = Number(state['rate'].value || 6.8);
   if (!brand && !state['power'].value && !term) {{
-    state['rows'].innerHTML = '<tr><td colspan="17" style="text-align:center;color:#999;padding:20px;">请选择发动机品牌或输入功率进行筛选</td></tr>';
+    state['rows'].innerHTML = '<tr><td colspan="16" style="text-align:center;color:#999;padding:20px;">请选择发动机品牌或输入功率进行筛选</td></tr>';
     state['count'].textContent = '';
     window.currentRows = [];
     return;
@@ -809,7 +809,6 @@ function render() {{
       '<td class="num">' + (selectedCanopy && selectedCanopy.deduct ? money(canopyDeduct) : '') + '</td>' +
       '<td class="num">' + (freight ? money(freight) : '') + '</td>' +
       '<td class="num"><span class="cv" data-v="' + money(cost) + '"><span class="cp">Copy</span>' + money(cost) + '</span></td>' +
-      '<td class="num"><span class="cv" data-v="' + money(factory) + '"><span class="cp">Copy</span>' + money(factory) + '</span></td>' +
       '<td class="num"><span class="cv" data-v="' + money(custom) + '"><span class="cp">Copy</span>' + money(custom) + '</span></td>' +
       '<td class="num"><span class="cv" data-v="' + (Number(custom) / rate).toFixed(0) + '"><span class="cp">Copy</span>' + (Number(custom) / rate).toFixed(0) + '</span></td>' +
       '<td>' + h(row.source_sheet) + '!' + h(row.source_row) + '</td></tr>';
@@ -875,7 +874,7 @@ document.getElementById('copy').addEventListener('click', async () => {{
   const rate = Number(state['rate'].value || 6.8);
   const tab = String.fromCharCode(9);
   const nl = String.fromCharCode(10);
-  const lines = [['Brand','Section','Model','Engine Power','Genset Power','Default Alt','Selected Alt','Alt Price','Silent Box','Box Price','Deduct','Freight','Cost','Factory','Sales','USD','Source'].join(tab)];
+  const lines = [['Brand','Section','Model','Engine Power','Genset Power','Default Alt','Selected Alt','Alt Price','Silent Box','Box Price','Deduct','Freight','Cost','Sales','USD','Source'].join(tab)];
   rows.forEach(row => {{
     const selectedAlt = findAlternator(alternatorBrand, row.genset_kw);
     const selectedCanopy = useCanopy ? findCanopy(state['canopy'].value, row.genset_kw) : null;
@@ -903,7 +902,6 @@ document.getElementById('copy').addEventListener('click', async () => {{
       selectedCanopy && selectedCanopy.deduct ? canopyDeduct.toFixed(0) : '',
       freight ? freight.toFixed(0) : '',
       Number(cost).toFixed(0),
-      Number(factory).toFixed(0),
       custom.toFixed(0),
       (Number(custom) / rate).toFixed(0),
       row.source_sheet + '!' + row.source_row
@@ -938,7 +936,7 @@ document.getElementById('altCopy').addEventListener('click', async () => {{
   document.getElementById('altCopy').textContent = 'Copied';
   setTimeout(() => document.getElementById('altCopy').textContent = 'Copy alternator prices', 1200);
 }});
-state.rows.innerHTML = '<tr><td colspan="17" style="text-align:center;color:#999;padding:20px;">请选择发动机品牌或输入功率进行筛选</td></tr>';
+state.rows.innerHTML = '<tr><td colspan="16" style="text-align:center;color:#999;padding:20px;">请选择发动机品牌或输入功率进行筛选</td></tr>';
 altState.rows.innerHTML = '';
 </script>
 </body>
